@@ -61,17 +61,29 @@ def build_peru_artist_master(root: str = "data") -> pd.DataFrame | None:
     if (mb is None or mb.empty) and (wd is None or wd.empty):
         return None
 
+    mb_cols = [
+        "artist_key", "musicbrainz_id", "musicbrainz_name", "artist_type", "gender", "country",
+        "begin_area", "area", "disambiguation", "musicbrainz_score",
+    ]
+    wd_cols = ["artist_key", "wikidata_id", "wikidata_name", "occupation", "genre", "birth_date"]
+
     if mb is not None and not mb.empty:
+        mb = mb[mb["artist_key"].notna()].copy()
         mb = mb.sort_values("score", ascending=False, na_position="last").drop_duplicates("artist_key")
         mb = mb.rename(columns={
             "name": "musicbrainz_name",
             "type": "artist_type",
             "score": "musicbrainz_score",
         })
+        for column in mb_cols:
+            if column not in mb.columns:
+                mb[column] = pd.NA
+        mb = mb[mb_cols]
     else:
-        mb = pd.DataFrame(columns=["artist_key"])
+        mb = pd.DataFrame(columns=mb_cols)
 
     if wd is not None and not wd.empty:
+        wd = wd[wd["artist_key"].notna()].copy()
         wd = (
             wd.groupby("artist_key", dropna=False)
             .agg(
@@ -83,17 +95,15 @@ def build_peru_artist_master(root: str = "data") -> pd.DataFrame | None:
             )
             .reset_index()
         )
+        for column in wd_cols:
+            if column not in wd.columns:
+                wd[column] = pd.NA
+        wd = wd[wd_cols]
     else:
-        wd = pd.DataFrame(columns=["artist_key"])
-
-    mb_cols = [
-        "artist_key", "musicbrainz_id", "musicbrainz_name", "artist_type", "gender", "country",
-        "begin_area", "area", "disambiguation", "musicbrainz_score",
-    ]
-    mb = mb[[c for c in mb_cols if c in mb.columns]]
+        wd = pd.DataFrame(columns=wd_cols)
 
     out = mb.merge(wd, on="artist_key", how="outer", indicator="match_status")
-    out["artist_name"] = out.get("musicbrainz_name").combine_first(out.get("wikidata_name"))
+    out["artist_name"] = out["musicbrainz_name"].combine_first(out["wikidata_name"])
     out["match_status"] = out["match_status"].map({
         "both": "matched",
         "left_only": "musicbrainz_only",
