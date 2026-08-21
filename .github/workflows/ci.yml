@@ -19,3 +19,25 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: pip install -e '.[dev]'
       - run: pytest -q
+
+  live-batch:
+    if: github.event_name == 'pull_request' && github.head_ref == 'feature/public-batch-data-hub'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e .
+      - run: dntl-datos --config config/sources.yaml --stage all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: live-public-data-hub-${{ github.run_id }}
+          path: |
+            data/raw
+            data/silver
+            data/marts
+            data/catalog
+          retention-days: 14
