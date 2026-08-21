@@ -1,0 +1,132 @@
+datasets:
+  - layer: raw
+    source: yahoo_finance
+    dataset: prices
+    domain: markets
+    description: Historical OHLCV market observations downloaded with yfinance.
+    grain: ticker x date
+    keys: [ticker, date]
+    cadence: weekdays
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
+
+  - layer: silver
+    source: yahoo_finance
+    dataset: prices
+    domain: markets
+    description: Typed and normalized market price observations.
+    grain: ticker x date
+    keys: [ticker, date]
+    cadence: weekdays
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
+
+  - layer: raw
+    source: world_bank
+    dataset: indicators
+    domain: macro_global
+    description: Country-level economic indicators from the World Bank API.
+    grain: country x indicator x year
+    keys: [country_code, indicator_code, year]
+    cadence: daily_check
+    usage_tier: public_api
+    consumers: [python, power_bi, econometrics]
+
+  - layer: silver
+    source: world_bank
+    dataset: indicators
+    domain: macro_global
+    description: Typed World Bank country-year indicator observations.
+    grain: country x indicator x year
+    keys: [country_code, indicator_code, year]
+    cadence: daily_check
+    usage_tier: public_api
+    consumers: [python, power_bi, econometrics]
+
+  - layer: raw
+    source: bcrp
+    dataset: series
+    domain: macro_peru
+    description: Configured economic time series from BCRP.
+    grain: series x period
+    keys: [series_code, period_label]
+    cadence: daily_check
+    usage_tier: public_api
+    consumers: [python, power_bi, econometrics]
+
+  - layer: silver
+    source: bcrp
+    dataset: series
+    domain: macro_peru
+    description: Typed BCRP series prepared for downstream models.
+    grain: series x period
+    keys: [series_code, period_label]
+    cadence: daily_check
+    usage_tier: public_api
+    consumers: [python, power_bi, econometrics]
+
+  - layer: raw
+    source: musicbrainz
+    dataset: peru_artists
+    domain: music_intelligence
+    description: Artist entities associated with Peru from MusicBrainz search.
+    grain: artist entity
+    keys: [musicbrainz_id]
+    cadence: weekly
+    usage_tier: open_data
+    consumers: [python, knowledge_graph, ml]
+
+  - layer: raw
+    source: wikidata
+    dataset: peru_musicians
+    domain: music_intelligence
+    description: Peruvian musician entities, occupations, genres and birth dates from Wikidata.
+    grain: artist x occupation x genre
+    keys: [wikidata_id, occupation, genre]
+    cadence: weekly
+    usage_tier: open_data
+    consumers: [python, knowledge_graph, ml]
+
+  - layer: marts
+    source: public
+    dataset: market_daily_features
+    domain: markets
+    description: Market prices enriched with returns, moving averages, volatility and drawdown.
+    grain: ticker x date
+    keys: [ticker, date]
+    cadence: weekdays
+    usage_tier: analytical
+    consumers: [power_bi, ml, econometrics]
+
+  - layer: marts
+    source: public
+    dataset: macro_country_year
+    domain: macro_global
+    description: Wide country-year macroeconomic panel ready for BI and econometrics.
+    grain: country x year
+    keys: [country_code, year]
+    cadence: daily_check
+    usage_tier: analytical
+    consumers: [power_bi, ml, econometrics]
+
+  - layer: marts
+    source: public
+    dataset: peru_artist_master
+    domain: music_intelligence
+    description: Canonical Peruvian artist table reconciling MusicBrainz and Wikidata by normalized artist key.
+    grain: canonical artist
+    keys: [artist_key]
+    cadence: weekly
+    usage_tier: analytical
+    consumers: [power_bi, ml, knowledge_graph]
+
+  - layer: marts
+    source: public
+    dataset: billboard_artist_snapshot
+    domain: music_commercial
+    description: Optional Billboard chart snapshot enriched against the Peruvian artist catalog.
+    grain: chart x date x rank
+    keys: [chart, chart_date, rank]
+    cadence: weekly
+    usage_tier: research_only
+    consumers: [power_bi, ml]

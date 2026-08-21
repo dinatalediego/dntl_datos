@@ -1,0 +1,45 @@
+markets:
+  yahoo_finance:
+    enabled: true
+    tickers:
+      - SPY
+      - QQQ
+      - EEM
+      - ^GSPC
+      - ^IXIC
+      - BTC-USD
+      - PEN=X
+    period: 5y
+    interval: 1d
+
+macro:
+  world_bank:
+    enabled: true
+    countries: [PER, CHL, COL, MEX, USA]
+    indicators:
+      NY.GDP.MKTP.CD: gdp_current_usd
+      FP.CPI.TOTL.ZG: inflation_consumer_pct
+      SL.UEM.TOTL.ZS: unemployment_pct
+      PA.NUS.FCRF: official_fx_lcu_per_usd
+  bcrp:
+    enabled: true
+    # Puedes ampliar estos códigos desde el portal de series del BCRP.
+    series:
+      PN01210PM: tipo_cambio_interbancario_venta
+    start_year: 2015
+
+music:
+  musicbrainz_peru:
+    enabled: true
+    query: "area:Peru"
+    page_size: 100
+    max_pages: 10
+  wikidata_peru:
+    enabled: true
+    limit: 1000
+  billboard:
+    enabled: false
+    charts:
+      - hot-100
+      - billboard-200
+      - latin-songs
