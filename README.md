@@ -1,6 +1,6 @@
 # dntl_datos
 
-Hub reproducible de ingesta **batch** de fuentes públicas para construir datacenters temáticos de mercados, macroeconomía y música.
+Hub reproducible de ingesta **batch** de fuentes públicas y hogar de **DNTL Datos Explorer**, una web app responsive/PWA para explorar mercados, macroeconomía y música peruana.
 
 ## Qué incluye
 
@@ -25,28 +25,105 @@ connectors/*
       |
       v
 RAW / Bronze
-  data/raw/<source>/<dataset>/run_date=YYYY-MM-DD/
       |
       v
 SILVER
-  tipado + nombres consistentes + claves normalizadas
       |
       v
 MARTS
-  market_daily_features
-  macro_country_year
-  peru_artist_master
-  billboard_artist_snapshot (opcional)
+      |
+      +--------------------+
+      |                    |
+      v                    v
+FastAPI read-only       Power BI / ML
       |
       v
-Power BI / Python / econometría / ML / agentes
-
-CATALOG
-  config/catalog.yaml          <- contrato declarativo
-  data/catalog/...             <- inventario materializado de cada corrida
+DNTL Datos Explorer
+React + Vite + PWA
+      |
+      v
+Web responsive -> instalar en Android -> validar uso -> Android nativo si aporta valor
 ```
 
 Cada dataset materializado genera `data.parquet` y `manifest.json` con capa, fuente, dataset, fecha, filas y columnas.
+
+## DNTL Datos Explorer v0.2
+
+La primera experiencia incluye cuatro vistas mobile-first:
+
+1. **Inicio**: estado de los datacenters, cobertura y señales de uso.
+2. **Música Peruana**: búsqueda por artista, género u ocupación.
+3. **Mercados**: último estado disponible por ticker con retorno, volatilidad y drawdown.
+4. **Economía**: panel por país para Perú, Chile, Colombia, México y EE. UU.
+
+La barra **“Pregunta a DNTL Datos”** usa por ahora routing determinístico sobre los marts. No depende todavía de un LLM y siempre muestra las fuentes utilizadas.
+
+La aplicación tiene dos modos:
+
+- `LIVE`: la API encontró los marts locales.
+- `DEMO`: la interfaz usa únicamente cobertura validada y evita inventar cotizaciones o indicadores puntuales.
+
+La validación inicial de producto se guarda en `localStorage` del propio navegador: aperturas, navegación, preguntas e intención de instalación. No se envía telemetría a terceros en esta versión.
+
+### API
+
+```text
+GET /api/health
+GET /api/summary
+GET /api/markets
+GET /api/macro?country=PER
+GET /api/artists?q=...
+GET /api/ask?q=...
+```
+
+### Ejecutar en Windows / VS Code
+
+Preparación manual desde la raíz del repositorio:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -e ".[dev]"
+cd web
+npm install
+cd ..
+```
+
+Luego puedes abrir API + web con:
+
+```powershell
+.\scripts\run_explorer.ps1
+```
+
+O ejecutarlas por separado:
+
+```powershell
+# Terminal 1
+.\.venv\Scripts\Activate.ps1
+dntl-datos-api
+
+# Terminal 2
+cd web
+npm run dev
+```
+
+La web queda en `http://127.0.0.1:5173` y la API en `http://127.0.0.1:8000`.
+
+Para probar el modo `LIVE`, ejecuta antes el pipeline completo:
+
+```powershell
+dntl-datos --config config/sources.yaml --stage all
+```
+
+### PWA / Android
+
+La carpeta `web/public` contiene:
+
+- `manifest.webmanifest`
+- `sw.js`
+- `icon.svg`
+
+En producción sobre HTTPS, un navegador Android compatible puede ofrecer la instalación de **DNTL Datos** como aplicación standalone. La app nativa se posterga hasta tener evidencia de uso que justifique capacidades móviles adicionales.
 
 ## Marts analíticos
 
@@ -54,15 +131,7 @@ Cada dataset materializado genera `data.parquet` y `manifest.json` con capa, fue
 
 Grano: `ticker x date`.
 
-Incluye OHLCV más:
-
-- `daily_return`
-- `ma_20`
-- `ma_60`
-- `volatility_30d_ann`
-- `drawdown`
-- `year`
-- `month`
+Incluye OHLCV más `daily_return`, `ma_20`, `ma_60`, `volatility_30d_ann`, `drawdown`, `year` y `month`.
 
 ### `macro_country_year`
 
@@ -70,19 +139,13 @@ Grano: `country x year`. Convierte los indicadores del World Bank a un panel anc
 
 ### `peru_artist_master`
 
-Grano: artista canónico. Cruza MusicBrainz y Wikidata usando una `artist_key` normalizada y conserva el estado del match:
-
-- `matched`
-- `musicbrainz_only`
-- `wikidata_only`
-
-Incluye IDs externos, género, ocupación, fecha de nacimiento, localización y metadata de MusicBrainz.
+Grano: artista canónico. Cruza MusicBrainz y Wikidata usando una `artist_key` normalizada y conserva `matched`, `musicbrainz_only` o `wikidata_only`.
 
 ### `billboard_artist_snapshot`
 
 Se crea solo si se habilita Billboard. Añade `chart_points` y marca coincidencias con el catálogo peruano.
 
-## Instalación
+## Instalación del motor de datos
 
 ```bash
 python -m venv .venv
@@ -104,7 +167,7 @@ Billboard opcional:
 pip install -e ".[billboard]"
 ```
 
-## Ejecutar
+## Pipeline batch
 
 Pipeline completo:
 
@@ -121,47 +184,28 @@ dntl-datos --stage marts
 dntl-datos --stage catalog
 ```
 
-`all` ejecuta:
-
-```text
-raw -> silver -> marts -> catalog
-```
+`all` ejecuta `raw -> silver -> marts -> catalog`.
 
 ## Configuración y catálogo
 
 - `config/sources.yaml`: qué fuentes, tickers, países, indicadores y charts se extraen.
 - `config/catalog.yaml`: dominio, descripción, grano, claves, cadencia, nivel de uso y consumidores esperados de cada dataset.
 
-Ejemplos incluidos:
-
-- `SPY`, `QQQ`, `EEM`, S&P 500, Nasdaq, BTC/USD y USD/PEN.
-- Perú, Chile, Colombia, México y EE. UU. vía World Bank.
-- tipo de cambio del BCRP.
-- artistas peruanos vía MusicBrainz y Wikidata.
-- Hot 100, Billboard 200 y Latin Songs como adaptadores opcionales.
-
 ## Automatización
 
-`.github/workflows/public_batch.yml` ejecuta el pipeline completo manualmente o en calendario y publica como artifact:
+`.github/workflows/public_batch.yml` ejecuta el pipeline completo manualmente o en calendario y publica `data/raw`, `data/silver`, `data/marts` y `data/catalog` como artifact.
 
-```text
-data/raw
-data/silver
-data/marts
-data/catalog
-```
-
-`.github/workflows/ci.yml` instala el proyecto y ejecuta `pytest` en pushes y pull requests.
+`.github/workflows/ci.yml` valida tanto el backend Python (`pytest`) como el build productivo del frontend React/Vite.
 
 ## Próximas extensiones naturales
 
-El diseño permite sumar conectores sin cambiar las capas superiores. Buenos siguientes datacenters:
-
+- persistir marts en un storage accesible desde la web desplegada.
+- publicar la PWA en HTTPS.
 - Wikipedia Pageviews / Google Trends para atención pública.
 - Spotify/YouTube mediante APIs autorizadas para señales musicales digitales.
-- INEI, MEF y datos abiertos del Estado peruano para economía Perú.
-- SEC/FRED u otras APIs oficiales para mercados y macro internacional.
-- un `peru_music_commercial_panel` longitudinal: artista x canción x semana x plataforma.
+- INEI, MEF y datos abiertos del Estado peruano.
+- `peru_music_commercial_panel`: artista x canción x semana x plataforma.
+- evaluar Android nativo únicamente después de observar uso real de la PWA.
 
 ## Fuentes
 
