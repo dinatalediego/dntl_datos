@@ -130,3 +130,25 @@ datasets:
     cadence: weekly
     usage_tier: research_only
     consumers: [power_bi, ml]
+
+  - layer: marts
+    source: statmuse
+    dataset: fc_barcelona_laliga_team_sot_matches
+    domain: sports_analytics
+    description: FC Barcelona LaLiga team shots-on-target match log used to anchor rolling windows.
+    grain: club x competition x date
+    keys: [club, competition, date]
+    cadence: snapshot
+    usage_tier: research_only
+    consumers: [python, power_bi]
+
+  - layer: marts
+    source: statmuse
+    dataset: fc_barcelona_laliga_player_sot_windows
+    domain: sports_analytics
+    description: Player shots-on-target totals and per-team-match rates across L3, L5, L10 and L15 Barcelona LaLiga team-game windows.
+    grain: as_of_date x club x competition x player
+    keys: [as_of_date, club, competition, player]
+    cadence: snapshot
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
