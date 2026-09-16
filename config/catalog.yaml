@@ -152,3 +152,26 @@ datasets:
     cadence: snapshot
     usage_tier: research_only
     consumers: [python, power_bi, ml]
+
+  - layer: silver
+    source: statz
+    dataset: fc_barcelona_laliga_player_match_sot
+    domain: sports_analytics
+    description: Verified Barcelona LaLiga player-appearance rows with minutes, venue, opponent, shots and shots on target.
+    grain: competition x club x date x player appearance
+    keys: [competition, club, date, player]
+    cadence: snapshot
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
+
+  - layer: marts
+    source: statz
+    dataset: fc_barcelona_laliga_player_sot_profiles_l5
+    domain: sports_analytics
+    description: L5 player SOT profile with averages, hit rates, dispersion, venue splits, minutes, SOT per 90 and trend.
+    grain: as_of_date x competition x club x player
+    keys: [as_of_date, competition, club, player]
+    cadence: snapshot
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
+
