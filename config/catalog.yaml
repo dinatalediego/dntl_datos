@@ -157,7 +157,7 @@ datasets:
     source: statz
     dataset: fc_barcelona_laliga_player_match_sot
     domain: sports_analytics
-    description: Verified Barcelona LaLiga player-appearance rows with minutes, venue, opponent, shots and shots on target.
+    description: Complete L15 Barcelona LaLiga player-appearance rows with minutes, starter flag, venue, opponent and shots on target.
     grain: competition x club x date x player appearance
     keys: [competition, club, date, player]
     cadence: snapshot
@@ -175,3 +175,25 @@ datasets:
     usage_tier: research_only
     consumers: [python, power_bi, ml]
 
+
+  - layer: silver
+    source: statmuse
+    dataset: fc_barcelona_laliga_player_match_grid_l15
+    domain: sports_analytics
+    description: Dense 15-match x 31-player grid that explicitly distinguishes appearances from did-not-appear rows.
+    grain: as_of_date x competition x club x date x player
+    keys: [as_of_date, competition, club, date, player]
+    cadence: snapshot
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
+
+  - layer: marts
+    source: statmuse
+    dataset: fc_barcelona_laliga_player_sot_profiles
+    domain: sports_analytics
+    description: Complete L3/L5/L10/L15 player SOT profiles with team-match and appearance denominators, hit rates, dispersion, minutes, SOT/90, venue splits and trend.
+    grain: as_of_date x competition x club x player
+    keys: [as_of_date, competition, club, player]
+    cadence: snapshot
+    usage_tier: research_only
+    consumers: [python, power_bi, ml]
