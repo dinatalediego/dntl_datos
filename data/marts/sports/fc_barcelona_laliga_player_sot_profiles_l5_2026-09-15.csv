@@ -1,10 +1,32 @@
-as_of_date,season,competition,club,player,team_matches,appearances,sot_total,avg_sot_per_team_match,avg_sot_per_appearance,median_sot_per_appearance,std_sot_per_appearance,hit_1plus_pct,hit_2plus_pct,hit_3plus_pct,minutes,sot_per_90,avg_sot_home_per_appearance,avg_sot_away_per_appearance,trend_sot_per_appearance,latest_date,latest_opponent,latest_venue,starts_known,starts,coverage_status
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Lamine Yamal,5,5,11,2.2,2.2,2,1.327,80,80,40,401,2.469,2.5,2,0.5,2026-09-13,Levante,away,0,,complete_observed_l5
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Raphinha,5,5,9,1.8,1.8,1,0.98,100,40,40,409,1.98,2,1.667,-0.4,2026-09-13,Levante,away,0,,complete_observed_l5
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Fermín López,5,5,8,1.6,1.6,2,1.356,60,60,40,371,1.941,1.5,1.667,-0.4,2026-09-13,Levante,away,0,,complete_observed_l5
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Karim Adeyemi,5,5,5,1,1,1,0.632,80,20,0,139,3.237,1,1,0.1,2026-09-13,Levante,away,0,,complete_observed_l5
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Anthony Gordon,5,5,4,0.8,0.8,1,0.748,60,20,0,311,1.158,1,0.667,-0.1,2026-09-13,Levante,away,0,,complete_observed_l5
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Xavi Espart,5,5,2,0.4,0.4,0,0.49,40,0,0,440,0.409,0.5,0.333,0.1,2026-09-13,Levante,away,0,,complete_observed_l5
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Marc Bernal,5,4,1,0.2,0.25,0,0.433,25,0,0,235,0.383,0.5,0,0.1,2026-09-06,Valencia,away,0,,source_through_2026-09-06
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Pedri,5,4,1,0.2,0.25,0,0.433,25,0,0,288,0.312,0,0.5,0.3,2026-09-06,Valencia,away,0,,source_through_2026-09-06
-2026-09-15,2026/2027,LaLiga,FC Barcelona,Dani Olmo,5,5,1,0.2,0.2,0,0.4,20,0,0,155,0.581,0.5,0,-0.1,2026-09-13,Levante,away,0,,complete_observed_l5
+as_of_date,competition,club,player,team_matches,appearances,appearance_pct,starts,start_pct_of_appearances,minutes,sot_total,avg_sot_per_team_match,avg_sot_per_appearance,median_sot_per_team_match,median_sot_per_appearance,std_sot_per_team_match,std_sot_per_appearance,hit_1plus_pct_team_match,hit_2plus_pct_team_match,hit_3plus_pct_team_match,hit_1plus_pct_appearance,hit_2plus_pct_appearance,hit_3plus_pct_appearance,sot_per_90,avg_sot_home_per_appearance,avg_sot_away_per_appearance,trend_sot_per_team_match,trend_sot_per_appearance,latest_date,latest_opponent,latest_venue,coverage_status
+2026-09-15,LaLiga,FC Barcelona,Raphinha,5,5,100,5,100,406,9,1.8,1.8,1,1,0.98,0.98,100,40,40,100,40,40,1.995,2,1.667,-0.4,-0.4,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Fermín López,5,5,100,4,80,371,8,1.6,1.6,2,2,1.356,1.356,60,60,40,60,60,40,1.941,1.5,1.667,-0.4,-0.4,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Lamine Yamal,5,5,100,5,100,399,11,2.2,2.2,2,2,1.327,1.327,80,80,40,80,80,40,2.481,2.5,2,0.5,0.5,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Ferrán Torres,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Marcus Rashford,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Karim Adeyemi,5,5,100,1,20,142,5,1,1,1,1,0.632,0.632,80,20,0,80,20,0,3.169,1,1,0.1,0.1,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Anthony Gordon,5,5,100,4,80,308,4,0.8,0.8,1,1,0.748,0.748,60,20,0,60,20,0,1.169,1,0.667,-0.1,-0.1,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Robert Lewandowski,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Gerard Martín,5,4,80,4,100,315,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,João Cancelo,5,4,80,0,0,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Xavi Espart,5,5,100,5,100,439,2,0.4,0.4,0,0,0.49,0.49,40,0,0,40,0,0,0.41,0.5,0.333,0.1,0.1,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Dani Olmo,5,5,100,1,20,158,1,0.2,0.2,0,0,0.4,0.4,20,0,0,20,0,0,0.57,0.5,0,-0.1,-0.1,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Pedri,5,5,100,4,80,350,1,0.2,0.2,0,0,0.4,0.4,20,0,0,20,0,0,0.257,0,0.333,0.1,0.1,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Andreas Christensen,5,4,80,2,50,254,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Roony Bardghji,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-17,Real Betis,home,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Marc Bernal,5,5,100,3,60,258,1,0.2,0.2,0,0,0.4,0.4,20,0,0,20,0,0,0.349,0.5,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Eric García,5,4,80,4,100,287,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Jules Koundé,5,4,80,1,25,174,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-06,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Ronald Araújo,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Alejandro Balde,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Álvaro Cortés,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-13,Alavés,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Frenkie de Jong,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Gabriel Jesus,5,1,20,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,,2026-09-06,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Gavi,5,1,20,1,100,45,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,,2026-08-23,Elche,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Hamza Abdelkarim,5,1,20,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,,2026-08-31,Rayo Vallecano,home,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Joan García,5,5,100,5,100,450,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Marc Casadó,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Pau Cubarsí,5,4,80,4,100,331,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Rodri,5,4,80,2,50,206,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2026-09-13,Levante,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Tomas Marques,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-13,Alavés,away,complete_l15_appearance_sot
+2026-09-15,LaLiga,FC Barcelona,Wojciech Szczęsny,5,0,0,0,,0,0,0,,0,,0,,0,0,0,,,,,,,0,,2026-05-23,Valencia,away,complete_l15_appearance_sot
