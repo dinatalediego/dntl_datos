@@ -1,115 +1,86 @@
-# FC Barcelona · tiros al arco (LaLiga)
+# FC Barcelona · Shot-on-target intelligence (LaLiga)
 
-Snapshot analítico con corte 2026-09-15. El objetivo es conservar tanto el agregado L3/L5/L10/L15 como una capa partido × jugador que permita reconstruir los indicadores sin depender de cálculos manuales.
+Snapshot reproducible con corte **2026-09-15**. La base ya no depende sólo de agregados: conserva el nivel **partido × jugador** para los últimos 15 partidos ligueros del FC Barcelona.
 
-## Semántica de ventanas
+## Estado de cobertura
 
-Las ventanas L3, L5, L10 y L15 se definen sobre los últimos N partidos del FC Barcelona en LaLiga.
+- 15 partidos de equipo.
+- 241 apariciones reales.
+- 31 jugadores distintos.
+- 465 filas en el grid denso = 15 partidos × 31 jugadores.
+- 11 titulares validados en cada partido.
+- 95 SOT de jugadores = 95 SOT del equipo.
+- 233 tiros del equipo en L15.
+- L3 = 25 SOT, L5 = 42, L10 = 66, L15 = 95.
 
-Hay dos promedios diferentes:
+La fuente de control es StatMuse. Para no confundir "jugó y tuvo 0 SOT" con "no jugó", se conservan dos tablas:
 
-- avg_sot_per_team_match_last_N: SOT acumulado / N partidos del Barcelona.
-- avg_sot_per_appearance_last_N: SOT acumulado / apariciones reales del jugador.
+### 1. Apariciones reales
+`data/silver/sports/fc_barcelona_laliga_player_match_sot_2026-09-15.csv`
 
-El primero responde “cuánto aporta por partido del equipo”. El segundo responde “cuánto produce cuando juega”.
+Una fila sólo si el jugador apareció. Grano:
+`competition × club × date × player appearance`.
 
-## Capas
+### 2. Grid denso
+`data/silver/sports/fc_barcelona_laliga_player_match_grid_l15_2026-09-15.csv`
 
-### Agregado L3/L5/L10/L15
+Una fila por cada combinación de los 15 partidos y los 31 jugadores observados. Cuando no aparece:
+- `appeared=0`
+- `started=0`
+- `minutes=0`
+- `shots_on_target=0`
+- `appearance_status=did_not_appear`
 
-fc_barcelona_laliga_player_sot_windows_2026-09-15.csv conserva:
-- acumulado de SOT;
-- avg_sot_last_3 / 5 / 10 / 15;
-- el alias histórico sot_per_team_match_last_N para compatibilidad.
+Esto permite usar tanto el denominador **partidos del equipo** como el denominador **apariciones**.
 
-### Partido × jugador
+## Marts
 
-data/silver/sports/fc_barcelona_laliga_player_match_sot_2026-09-15.csv tiene grano:
-date × player appearance.
+### Ventanas
+`fc_barcelona_laliga_player_sot_windows_2026-09-15.csv`
 
-Campos principales:
-- rival y local/visitante;
-- minutos;
-- posición;
-- tiros;
-- tiros al arco;
-- appeared;
-- started nullable;
-- URL y frescura de la fuente.
+Por jugador:
+- acumulado L3/L5/L10/L15;
+- promedio SOT por partido del Barça;
+- apariciones;
+- promedio SOT por aparición.
 
-La titularidad NO se infiere a partir de minutos. Si la fuente no expone una señal explícita por partido, started queda vacío.
+### Perfil analítico completo
+`fc_barcelona_laliga_player_sot_profiles_2026-09-15.csv`
 
-### Perfil analítico L5
-
-fc_barcelona_laliga_player_sot_profiles_l5_2026-09-15.csv materializa:
-- acumulado;
+Para L3, L5, L10 y L15 materializa:
+- SOT acumulado;
 - promedio por partido del equipo;
 - promedio por aparición;
-- mediana;
-- desviación estándar poblacional;
-- % de apariciones con 1+, 2+ y 3+ SOT;
-- minutos;
-- SOT/90;
-- media local y visitante;
-- tendencia lineal de SOT por aparición;
-- rival y sede más recientes;
-- cobertura de titularidad.
+- mediana y desviación con ambos denominadores;
+- % 1+, 2+ y 3+ SOT por partido del equipo;
+- % 1+, 2+ y 3+ SOT por aparición;
+- minutos y SOT/90;
+- apariciones y titularidades;
+- media local/visitante;
+- tendencia lineal por partido y por aparición;
+- rival y sede de la última aparición.
 
-## Cobertura y QA
+El alias histórico `hit_Xplus_pct_last_N` conserva el denominador por aparición.
 
-El seed partido × jugador cubre todos los jugadores que aportaron al menos un SOT en los cinco partidos de liga 2026/27 observados. La suma por fecha reconcilia el 100% del volumen de SOT del equipo:
+## QA
 
-| Fecha | Rival | SOT Barça |
-|---|---|---:|
-| 2026-08-23 | Elche | 7 |
-| 2026-08-27 | Athletic Club | 10 |
-| 2026-08-31 | Rayo Vallecano | 9 |
-| 2026-09-06 | Valencia | 10 |
-| 2026-09-13 | Levante | 6 |
+`validate_complete_appearance_grid` bloquea el snapshot si:
+- existe duplicado date × player;
+- falta alguna fecha de los 15 partidos;
+- una aparición tiene `appeared != 1`;
+- un partido no tiene exactamente 11 titulares;
+- los minutos están fuera de 1..120;
+- la suma de SOT de jugadores no reconcilia con el SOT del equipo.
 
-Total L5 = 42 SOT.
+`build_dense_player_match_grid` genera el grid DNP explícito.
+`build_window_summary` produce todas las métricas L3/L5/L10/L15 desde el nivel granular.
 
-Importante: esto todavía no es un appearance grid completo de todos los jugadores con 0 SOT. Por eso:
-- la reconciliación de volumen SOT L5 sí es completa;
-- los indicadores de hit-rate/minutos se publican sólo donde hay filas de aparición verificadas;
-- Pedri y Marc Bernal conservan source_freshness=through_2026-09-06 porque sus páginas observadas no estaban actualizadas al 13-Sep;
-- el backfill partido × jugador de L10/L15 todavía debe ampliarse antes de tratar medianas, desviaciones e hit-rates L10/L15 como completos.
+## Fuente y limitación importante
 
-## Cálculos
+Fuente principal: StatMuse, consultado con corte 2026-09-15/16.
+Referencia de control:
+https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga
 
-dntl_datos.sports.barcelona_sot.build_window_summary genera, para cada N:
-- sot_last_N
-- avg_sot_per_team_match_last_N
-- avg_sot_per_appearance_last_N
-- median_sot_per_appearance_last_N
-- std_sot_per_appearance_last_N
-- hit_1plus_pct_last_N
-- hit_2plus_pct_last_N
-- hit_3plus_pct_last_N
-- minutes_last_N
-- sot_per_90_last_N
-- avg_sot_home_per_appearance_last_N
-- avg_sot_away_per_appearance_last_N
-- trend_sot_per_appearance_last_N
-- starts_known_last_N / starts_last_N
-- latest_opponent_last_N / latest_venue_last_N
+Los SOT y minutos/titularidad se construyen desde los match logs, lineups y player stats. La columna `shots` individual queda vacía en este backfill cuando no existe un valor player-level verificado de manera homogénea; **no se imputa**. El total de tiros del equipo sí se conserva en la tabla de partidos y reconcilia 233 para L15.
 
-Los hit-rates usan apariciones como denominador; un partido que el jugador no disputó no cuenta como fallo.
-
-## Fuentes
-
-Fuente de investigación: Statz, que documenta datos de partido provenientes de Sportmonks, más el snapshot agregado original de StatMuse.
-
-Referencias:
-- https://statz.ai/team/fc-barcelona/shots-on-target
-- https://statz.ai/player/lamine-yamal/37656179
-- https://statz.ai/player/raphinha/160258
-- https://statz.ai/player/fermin-lopez/37596363
-- https://statz.ai/player/karim-adeyemi/15040126
-- https://statz.ai/player/anthony-gordon/9611543
-- https://statz.ai/player/dani-olmo/74060
-- https://statz.ai/player/xavi-espart/37719662
-- https://statz.ai/player/pedri/37288001
-- https://statz.ai/player/marc-bernal/37710798
-
-Uso: research_only. Mantener siempre as_of_date, URL de fuente y controles de reconciliación.
+Uso: `research_only`.
