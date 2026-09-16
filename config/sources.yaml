@@ -49,7 +49,7 @@ sports:
     enabled: false
     usage_tier: research_only
     ingestion: manual_snapshot
-    note: "No automated scraping connector is enabled; preserve as_of_date, source query and reconciliation checks."
+    note: "Primary sports snapshot source for team totals, match lineups and player match logs; preserve as_of_date, source query, starter count and SOT reconciliation checks."
   statz:
     enabled: false
     usage_tier: research_only
