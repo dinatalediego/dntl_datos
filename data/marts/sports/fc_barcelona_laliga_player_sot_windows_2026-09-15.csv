@@ -1,20 +1,32 @@
-as_of_date,competition,club,player,sot_last_3,avg_sot_last_3,sot_per_team_match_last_3,sot_last_5,avg_sot_last_5,sot_per_team_match_last_5,sot_last_10,avg_sot_last_10,sot_per_team_match_last_10,sot_last_15,avg_sot_last_15,sot_per_team_match_last_15
-2026-09-15,LaLiga,FC Barcelona,Raphinha,5,1.667,1.667,9,1.8,1.8,14,1.4,1.4,16,1.067,1.067
-2026-09-15,LaLiga,FC Barcelona,Fermín López,3,1,1,8,1.6,1.6,12,1.2,1.2,16,1.067,1.067
-2026-09-15,LaLiga,FC Barcelona,Lamine Yamal,8,2.667,2.667,11,2.2,2.2,11,1.1,1.1,14,0.933,0.933
-2026-09-15,LaLiga,FC Barcelona,Ferran Torres,0,0,0,0,0,0,4,0.4,0.4,9,0.6,0.6
-2026-09-15,LaLiga,FC Barcelona,Marcus Rashford,0,0,0,0,0,0,2,0.2,0.2,7,0.467,0.467
-2026-09-15,LaLiga,FC Barcelona,Karim Adeyemi,3,1,1,5,1,1,5,0.5,0.5,5,0.333,0.333
-2026-09-15,LaLiga,FC Barcelona,Anthony Gordon,3,1,1,4,0.8,0.8,4,0.4,0.4,4,0.267,0.267
-2026-09-15,LaLiga,FC Barcelona,Robert Lewandowski,0,0,0,0,0,0,3,0.3,0.3,4,0.267,0.267
-2026-09-15,LaLiga,FC Barcelona,Gerard Martín,0,0,0,0,0,0,1,0.1,0.1,3,0.2,0.2
-2026-09-15,LaLiga,FC Barcelona,João Cancelo,0,0,0,0,0,0,1,0.1,0.1,3,0.2,0.2
-2026-09-15,LaLiga,FC Barcelona,Xavi Espart,1,0.333,0.333,2,0.4,0.4,2,0.2,0.2,2,0.133,0.133
-2026-09-15,LaLiga,FC Barcelona,Andreas Christensen,0,0,0,0,0,0,2,0.2,0.2,2,0.133,0.133
-2026-09-15,LaLiga,FC Barcelona,Dani Olmo,0,0,0,1,0.2,0.2,1,0.1,0.1,2,0.133,0.133
-2026-09-15,LaLiga,FC Barcelona,Pedri,1,0.333,0.333,1,0.2,0.2,1,0.1,0.1,2,0.133,0.133
-2026-09-15,LaLiga,FC Barcelona,Roony Bardghji,0,0,0,0,0,0,1,0.1,0.1,2,0.133,0.133
-2026-09-15,LaLiga,FC Barcelona,Marc Bernal,1,0.333,0.333,1,0.2,0.2,1,0.1,0.1,1,0.067,0.067
-2026-09-15,LaLiga,FC Barcelona,Jules Koundé,0,0,0,0,0,0,1,0.1,0.1,1,0.067,0.067
-2026-09-15,LaLiga,FC Barcelona,Eric García,0,0,0,0,0,0,0,0,0,1,0.067,0.067
-2026-09-15,LaLiga,FC Barcelona,Ronald Araújo,0,0,0,0,0,0,0,0,0,1,0.067,0.067
+as_of_date,competition,club,player,sot_last_3,avg_sot_last_3,sot_per_team_match_last_3,appearances_last_3,avg_sot_per_appearance_last_3,sot_last_5,avg_sot_last_5,sot_per_team_match_last_5,appearances_last_5,avg_sot_per_appearance_last_5,sot_last_10,avg_sot_last_10,sot_per_team_match_last_10,appearances_last_10,avg_sot_per_appearance_last_10,sot_last_15,avg_sot_last_15,sot_per_team_match_last_15,appearances_last_15,avg_sot_per_appearance_last_15
+2026-09-15,LaLiga,FC Barcelona,Raphinha,5,1.667,1.667,3,1.667,9,1.8,1.8,5,1.8,14,1.4,1.4,7,2,16,1.067,1.067,8,2
+2026-09-15,LaLiga,FC Barcelona,Fermín López,3,1,1,3,1,8,1.6,1.6,5,1.6,12,1.2,1.2,8,1.5,16,1.067,1.067,13,1.231
+2026-09-15,LaLiga,FC Barcelona,Lamine Yamal,8,2.667,2.667,3,2.667,11,2.2,2.2,5,2.2,11,1.1,1.1,5,2.2,14,0.933,0.933,9,1.556
+2026-09-15,LaLiga,FC Barcelona,Ferrán Torres,0,0,0,0,,0,0,0,0,,4,0.4,0.4,4,1,9,0.6,0.6,8,1.125
+2026-09-15,LaLiga,FC Barcelona,Marcus Rashford,0,0,0,0,,0,0,0,0,,2,0.2,0.2,4,0.5,7,0.467,0.467,9,0.778
+2026-09-15,LaLiga,FC Barcelona,Karim Adeyemi,3,1,1,3,1,5,1,1,5,1,5,0.5,0.5,5,1,5,0.333,0.333,5,1
+2026-09-15,LaLiga,FC Barcelona,Anthony Gordon,3,1,1,3,1,4,0.8,0.8,5,0.8,4,0.4,0.4,5,0.8,4,0.267,0.267,5,0.8
+2026-09-15,LaLiga,FC Barcelona,Robert Lewandowski,0,0,0,0,,0,0,0,0,,3,0.3,0.3,5,0.6,4,0.267,0.267,8,0.5
+2026-09-15,LaLiga,FC Barcelona,Gerard Martín,0,0,0,2,0,0,0,0,4,0,1,0.1,0.1,8,0.125,3,0.2,0.2,13,0.231
+2026-09-15,LaLiga,FC Barcelona,João Cancelo,0,0,0,2,0,0,0,0,4,0,1,0.1,0.1,9,0.111,3,0.2,0.2,14,0.214
+2026-09-15,LaLiga,FC Barcelona,Xavi Espart,1,0.333,0.333,3,0.333,2,0.4,0.4,5,0.4,2,0.2,0.2,7,0.286,2,0.133,0.133,8,0.25
+2026-09-15,LaLiga,FC Barcelona,Dani Olmo,0,0,0,3,0,1,0.2,0.2,5,0.2,1,0.1,0.1,10,0.1,2,0.133,0.133,15,0.133
+2026-09-15,LaLiga,FC Barcelona,Pedri,1,0.333,0.333,3,0.333,1,0.2,0.2,5,0.2,1,0.1,0.1,9,0.111,2,0.133,0.133,14,0.143
+2026-09-15,LaLiga,FC Barcelona,Andreas Christensen,0,0,0,3,0,0,0,0,4,0,2,0.2,0.2,5,0.4,2,0.133,0.133,5,0.4
+2026-09-15,LaLiga,FC Barcelona,Roony Bardghji,0,0,0,0,,0,0,0,0,,1,0.1,0.1,3,0.333,2,0.133,0.133,5,0.4
+2026-09-15,LaLiga,FC Barcelona,Marc Bernal,1,0.333,0.333,3,0.333,1,0.2,0.2,5,0.2,1,0.1,0.1,10,0.1,1,0.067,0.067,12,0.083
+2026-09-15,LaLiga,FC Barcelona,Eric García,0,0,0,2,0,0,0,0,4,0,0,0,0,8,0,1,0.067,0.067,11,0.091
+2026-09-15,LaLiga,FC Barcelona,Jules Koundé,0,0,0,2,0,0,0,0,4,0,1,0.1,0.1,6,0.167,1,0.067,0.067,9,0.111
+2026-09-15,LaLiga,FC Barcelona,Ronald Araújo,0,0,0,0,,0,0,0,0,,0,0,0,3,0,1,0.067,0.067,7,0.143
+2026-09-15,LaLiga,FC Barcelona,Alejandro Balde,0,0,0,0,,0,0,0,0,,0,0,0,4,0,0,0,0,7,0
+2026-09-15,LaLiga,FC Barcelona,Álvaro Cortés,0,0,0,0,,0,0,0,0,,0,0,0,1,0,0,0,0,1,0
+2026-09-15,LaLiga,FC Barcelona,Frenkie de Jong,0,0,0,0,,0,0,0,0,,0,0,0,3,0,0,0,0,6,0
+2026-09-15,LaLiga,FC Barcelona,Gabriel Jesus,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0
+2026-09-15,LaLiga,FC Barcelona,Gavi,0,0,0,0,,0,0,0,1,0,0,0,0,5,0,0,0,0,9,0
+2026-09-15,LaLiga,FC Barcelona,Hamza Abdelkarim,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0
+2026-09-15,LaLiga,FC Barcelona,Joan García,0,0,0,3,0,0,0,0,5,0,0,0,0,8,0,0,0,0,13,0
+2026-09-15,LaLiga,FC Barcelona,Marc Casadó,0,0,0,0,,0,0,0,0,,0,0,0,3,0,0,0,0,6,0
+2026-09-15,LaLiga,FC Barcelona,Pau Cubarsí,0,0,0,3,0,0,0,0,4,0,0,0,0,7,0,0,0,0,12,0
+2026-09-15,LaLiga,FC Barcelona,Rodri,0,0,0,3,0,0,0,0,4,0,0,0,0,4,0,0,0,0,4,0
+2026-09-15,LaLiga,FC Barcelona,Tomas Marques,0,0,0,0,,0,0,0,0,,0,0,0,1,0,0,0,0,1,0
+2026-09-15,LaLiga,FC Barcelona,Wojciech Szczęsny,0,0,0,0,,0,0,0,0,,0,0,0,2,0,0,0,0,2,0
