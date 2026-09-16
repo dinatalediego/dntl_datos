@@ -1,0 +1,10 @@
+as_of_date,season,competition,club,player,team_matches,appearances,sot_total,avg_sot_per_team_match,avg_sot_per_appearance,median_sot_per_appearance,std_sot_per_appearance,hit_1plus_pct,hit_2plus_pct,hit_3plus_pct,minutes,sot_per_90,avg_sot_home_per_appearance,avg_sot_away_per_appearance,trend_sot_per_appearance,latest_date,latest_opponent,latest_venue,starts_known,starts,coverage_status
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Lamine Yamal,5,5,11,2.2,2.2,2,1.327,80,80,40,401,2.469,2.5,2,0.5,2026-09-13,Levante,away,0,,complete_observed_l5
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Raphinha,5,5,9,1.8,1.8,1,0.98,100,40,40,409,1.98,2,1.667,-0.4,2026-09-13,Levante,away,0,,complete_observed_l5
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Fermín López,5,5,8,1.6,1.6,2,1.356,60,60,40,371,1.941,1.5,1.667,-0.4,2026-09-13,Levante,away,0,,complete_observed_l5
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Karim Adeyemi,5,5,5,1,1,1,0.632,80,20,0,139,3.237,1,1,0.1,2026-09-13,Levante,away,0,,complete_observed_l5
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Anthony Gordon,5,5,4,0.8,0.8,1,0.748,60,20,0,311,1.158,1,0.667,-0.1,2026-09-13,Levante,away,0,,complete_observed_l5
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Xavi Espart,5,5,2,0.4,0.4,0,0.49,40,0,0,440,0.409,0.5,0.333,0.1,2026-09-13,Levante,away,0,,complete_observed_l5
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Marc Bernal,5,4,1,0.2,0.25,0,0.433,25,0,0,235,0.383,0.5,0,0.1,2026-09-06,Valencia,away,0,,source_through_2026-09-06
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Pedri,5,4,1,0.2,0.25,0,0.433,25,0,0,288,0.312,0,0.5,0.3,2026-09-06,Valencia,away,0,,source_through_2026-09-06
+2026-09-15,2026/2027,LaLiga,FC Barcelona,Dani Olmo,5,5,1,0.2,0.2,0,0.4,20,0,0,155,0.581,0.5,0,-0.1,2026-09-13,Levante,away,0,,complete_observed_l5
