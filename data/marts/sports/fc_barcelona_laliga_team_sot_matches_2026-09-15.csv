@@ -1,16 +1,16 @@
-date,competition,club,opponent,venue,sot
-2026-03-22,LaLiga,FC Barcelona,Rayo Vallecano,home,4
-2026-04-04,LaLiga,FC Barcelona,Atlético Madrid,away,8
-2026-04-11,LaLiga,FC Barcelona,Espanyol,home,10
-2026-04-22,LaLiga,FC Barcelona,Celta Vigo,home,3
-2026-04-25,LaLiga,FC Barcelona,Getafe,away,4
-2026-05-02,LaLiga,FC Barcelona,Osasuna,away,4
-2026-05-10,LaLiga,FC Barcelona,Real Madrid,home,7
-2026-05-13,LaLiga,FC Barcelona,Alavés,away,0
-2026-05-17,LaLiga,FC Barcelona,Real Betis,home,9
-2026-05-23,LaLiga,FC Barcelona,Valencia,away,4
-2026-08-23,LaLiga,FC Barcelona,Elche,away,7
-2026-08-27,LaLiga,FC Barcelona,Athletic Club,home,10
-2026-08-31,LaLiga,FC Barcelona,Rayo Vallecano,home,9
-2026-09-06,LaLiga,FC Barcelona,Valencia,away,10
-2026-09-13,LaLiga,FC Barcelona,Levante,away,6
+date,season,competition,club,opponent,venue,score_for,score_against,result,shots,sot,source_provider,source_url,as_of_date
+2026-03-22,2025/2026,LaLiga,FC Barcelona,Rayo Vallecano,home,1,0,W,15,4,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-04-04,2025/2026,LaLiga,FC Barcelona,Atlético Madrid,away,2,1,W,22,8,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-04-11,2025/2026,LaLiga,FC Barcelona,Espanyol,home,4,1,W,20,10,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-04-22,2025/2026,LaLiga,FC Barcelona,Celta Vigo,home,1,0,W,10,3,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-04-25,2025/2026,LaLiga,FC Barcelona,Getafe,away,2,0,W,13,4,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-05-02,2025/2026,LaLiga,FC Barcelona,Osasuna,away,2,1,W,13,4,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-05-10,2025/2026,LaLiga,FC Barcelona,Real Madrid,home,2,0,W,10,7,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-05-13,2025/2026,LaLiga,FC Barcelona,Alavés,away,0,1,L,8,0,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-05-17,2025/2026,LaLiga,FC Barcelona,Real Betis,home,3,1,W,15,9,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-05-23,2025/2026,LaLiga,FC Barcelona,Valencia,away,1,3,L,11,4,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-08-23,2026/2027,LaLiga,FC Barcelona,Elche,away,5,0,W,11,7,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-08-27,2026/2027,LaLiga,FC Barcelona,Athletic Club,home,2,0,W,22,10,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-08-31,2026/2027,LaLiga,FC Barcelona,Rayo Vallecano,home,5,2,W,26,9,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-09-06,2026/2027,LaLiga,FC Barcelona,Valencia,away,5,0,W,25,10,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
+2026-09-13,2026/2027,LaLiga,FC Barcelona,Levante,away,4,2,W,12,6,StatMuse,https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga,2026-09-15
