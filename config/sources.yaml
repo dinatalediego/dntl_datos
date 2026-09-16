@@ -43,3 +43,10 @@ music:
       - hot-100
       - billboard-200
       - latin-songs
+
+sports:
+  statmuse:
+    enabled: false
+    usage_tier: research_only
+    ingestion: manual_snapshot
+    note: "No automated scraping connector is enabled; preserve as_of_date, source query and reconciliation checks."
