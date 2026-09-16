@@ -50,3 +50,9 @@ sports:
     usage_tier: research_only
     ingestion: manual_snapshot
     note: "No automated scraping connector is enabled; preserve as_of_date, source query and reconciliation checks."
+  statz:
+    enabled: false
+    usage_tier: research_only
+    ingestion: manual_snapshot
+    note: "Match-level public player pages; preserve source URL/freshness. Do not infer started from minutes."
+
