@@ -1,46 +1,115 @@
 # FC Barcelona · tiros al arco (LaLiga)
 
-Snapshot analítico al **2026-09-15** para estudiar tiros al arco (SOT, shots on target) del FC Barcelona por jugador.
+Snapshot analítico con corte 2026-09-15. El objetivo es conservar tanto el agregado L3/L5/L10/L15 como una capa partido × jugador que permita reconstruir los indicadores sin depender de cálculos manuales.
 
-## Definición de las ventanas
+## Semántica de ventanas
 
-Las ventanas L3, L5, L10 y L15 se calculan sobre los **últimos N partidos del FC Barcelona en LaLiga**, no sobre los últimos N partidos personales de cada jugador. Esto mantiene el mismo período de comparación para todos los jugadores.
+Las ventanas L3, L5, L10 y L15 se definen sobre los últimos N partidos del FC Barcelona en LaLiga.
 
-`sot_per_team_match_last_N` usa N como denominador. Por ejemplo, 8 SOT de Lamine Yamal en L3 = 8 / 3 = 2.667 SOT por partido del equipo.
+Hay dos promedios diferentes:
 
-## Archivos
+- avg_sot_per_team_match_last_N: SOT acumulado / N partidos del Barcelona.
+- avg_sot_per_appearance_last_N: SOT acumulado / apariciones reales del jugador.
 
-- `fc_barcelona_laliga_player_sot_windows_2026-09-15.csv`: SOT acumulados y por partido de equipo en L3/L5/L10/L15.
-- `fc_barcelona_laliga_team_sot_matches_2026-09-15.csv`: log de los 15 partidos del equipo que definen la ventana máxima.
+El primero responde “cuánto aporta por partido del equipo”. El segundo responde “cuánto produce cuando juega”.
 
-## Control de calidad
+## Capas
 
-La suma de SOT de jugadores debe reconciliar con el total del equipo:
+### Agregado L3/L5/L10/L15
 
-| Ventana | SOT equipo | Suma jugadores |
-|---|---:|---:|
-| L3 | 25 | 25 |
-| L5 | 42 | 42 |
-| L10 | 66 | 66 |
-| L15 | 95 | 95 |
+fc_barcelona_laliga_player_sot_windows_2026-09-15.csv conserva:
+- acumulado de SOT;
+- avg_sot_last_3 / 5 / 10 / 15;
+- el alias histórico sot_per_team_match_last_N para compatibilidad.
 
-Si una futura actualización no reconcilia, el snapshot no debe publicarse como validado.
+### Partido × jugador
+
+data/silver/sports/fc_barcelona_laliga_player_match_sot_2026-09-15.csv tiene grano:
+date × player appearance.
+
+Campos principales:
+- rival y local/visitante;
+- minutos;
+- posición;
+- tiros;
+- tiros al arco;
+- appeared;
+- started nullable;
+- URL y frescura de la fuente.
+
+La titularidad NO se infiere a partir de minutos. Si la fuente no expone una señal explícita por partido, started queda vacío.
+
+### Perfil analítico L5
+
+fc_barcelona_laliga_player_sot_profiles_l5_2026-09-15.csv materializa:
+- acumulado;
+- promedio por partido del equipo;
+- promedio por aparición;
+- mediana;
+- desviación estándar poblacional;
+- % de apariciones con 1+, 2+ y 3+ SOT;
+- minutos;
+- SOT/90;
+- media local y visitante;
+- tendencia lineal de SOT por aparición;
+- rival y sede más recientes;
+- cobertura de titularidad.
+
+## Cobertura y QA
+
+El seed partido × jugador cubre todos los jugadores que aportaron al menos un SOT en los cinco partidos de liga 2026/27 observados. La suma por fecha reconcilia el 100% del volumen de SOT del equipo:
+
+| Fecha | Rival | SOT Barça |
+|---|---|---:|
+| 2026-08-23 | Elche | 7 |
+| 2026-08-27 | Athletic Club | 10 |
+| 2026-08-31 | Rayo Vallecano | 9 |
+| 2026-09-06 | Valencia | 10 |
+| 2026-09-13 | Levante | 6 |
+
+Total L5 = 42 SOT.
+
+Importante: esto todavía no es un appearance grid completo de todos los jugadores con 0 SOT. Por eso:
+- la reconciliación de volumen SOT L5 sí es completa;
+- los indicadores de hit-rate/minutos se publican sólo donde hay filas de aparición verificadas;
+- Pedri y Marc Bernal conservan source_freshness=through_2026-09-06 porque sus páginas observadas no estaban actualizadas al 13-Sep;
+- el backfill partido × jugador de L10/L15 todavía debe ampliarse antes de tratar medianas, desviaciones e hit-rates L10/L15 como completos.
+
+## Cálculos
+
+dntl_datos.sports.barcelona_sot.build_window_summary genera, para cada N:
+- sot_last_N
+- avg_sot_per_team_match_last_N
+- avg_sot_per_appearance_last_N
+- median_sot_per_appearance_last_N
+- std_sot_per_appearance_last_N
+- hit_1plus_pct_last_N
+- hit_2plus_pct_last_N
+- hit_3plus_pct_last_N
+- minutes_last_N
+- sot_per_90_last_N
+- avg_sot_home_per_appearance_last_N
+- avg_sot_away_per_appearance_last_N
+- trend_sot_per_appearance_last_N
+- starts_known_last_N / starts_last_N
+- latest_opponent_last_N / latest_venue_last_N
+
+Los hit-rates usan apariciones como denominador; un partido que el jugador no disputó no cuenta como fallo.
 
 ## Fuentes
 
-Fuente de investigación: StatMuse FC, LaLiga.
+Fuente de investigación: Statz, que documenta datos de partido provenientes de Sportmonks, más el snapshot agregado original de StatMuse.
 
-Consultas de referencia:
-- https://www.statmuse.com/fc/ask/barcelona-players-stats-shots-on-target-last-3-matches?l=laliga
-- https://www.statmuse.com/fc/ask/barcelona-player-most-shots-on-target-last-5-games?l=laliga
-- https://www.statmuse.com/fc/ask/which-barcelona-player-has-the-most-shots-on-target-last-10-games?l=laliga
-- https://www.statmuse.com/fc/ask/barcelona-shots-on-target-in-the-last-15-games?l=laliga
+Referencias:
+- https://statz.ai/team/fc-barcelona/shots-on-target
+- https://statz.ai/player/lamine-yamal/37656179
+- https://statz.ai/player/raphinha/160258
+- https://statz.ai/player/fermin-lopez/37596363
+- https://statz.ai/player/karim-adeyemi/15040126
+- https://statz.ai/player/anthony-gordon/9611543
+- https://statz.ai/player/dani-olmo/74060
+- https://statz.ai/player/xavi-espart/37719662
+- https://statz.ai/player/pedri/37288001
+- https://statz.ai/player/marc-bernal/37710798
 
-El dataset es para análisis/research. La cobertura y metodología del proveedor pueden cambiar; por eso se conserva `as_of_date`, el log de partidos y la reconciliación de totales.
-
-## Actualización futura
-
-Normaliza observaciones a grano `date x player` con al menos:
-`date, player, shots_on_target, appeared`.
-
-Luego usa `dntl_datos.sports.barcelona_sot.build_window_summary` para regenerar las ventanas sin cambiar la semántica.
+Uso: research_only. Mantener siempre as_of_date, URL de fuente y controles de reconciliación.
